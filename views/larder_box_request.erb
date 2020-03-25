@@ -1,0 +1,16 @@
+<body>
+<strong>Requesting support for</strong>: <%= request.person_name %>, <%= request.person_phone %>
+
+<strong>Submitted by</strong>: <%= request.referrer_name %>, <%= request.referrer_relationship %>, <%= request.referrer_email %>
+
+<strong>Nearest larder</strong>: <%= request.closest_larder %>
+
+<strong>Delivery/pickup</strong>: <%= request.delivery_or_pickup %>
+<%= request.delivery_instructions %>
+<%= request.other_info %>
+
+<strong>Address</strong>: <%= request.address %>, <%= request.postcode %>
+<strong>Phone</strong>: <%= request.person_phone %>
+<strong>Email</strong>: <%= request.person_email %>
+</body>
+

@@ -4,14 +4,39 @@ Dotenv.load(".env")
 
 require 'sinatra'
 require './support_request'
+require 'active_support/time'
+require 'asana'
 
 post '/support_requests' do
   data = JSON.parse(request.body.read)
 
-  x = erb :asana_task, locals: {request: SupportRequest.new(data)}
+  request = SupportRequest.new(data)
 
-  puts x
+  if request.is_larder_box_request?
+    notes = erb :larder_box_request, locals: {request: request}
+    title = "[##{request.request_num}] Larder box request for #{request.person_name}, #{request.postcode}"
+    project = "1168339813840817"
+  else
+    notes = erb :regular_request, locals: {request: request}
+    title = "[##{request.request_num}] Support request for #{request.person_name}, #{request.postcode}"
+    project = "1167559196211825"
+  end
 
+  payload = {
+    projects: [project],
+    due_on: Date.today + 2.days,
+    name: title,
+    html_notes: notes.strip
+  }
 
+  if ENV["ASANA_API_KEY"]
+    client = Asana::Client.new { |c|
+      c.authentication :access_token, ENV["ASANA_API_KEY"]
+    }
+
+    client.tasks.create(payload)
+  end
+
+  status :ok
 end
 

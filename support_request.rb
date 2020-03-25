@@ -33,6 +33,10 @@ class SupportRequest
 
   attr_accessor :closest_larder, :delivery_instructions, :delivery_or_pickup
 
+  def is_larder_box_request?
+    !!closest_larder
+  end
+
   def initialize(params)
     set_common_fields(params)
     self.details = params["848357083"]
