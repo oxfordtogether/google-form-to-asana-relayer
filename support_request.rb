@@ -1,13 +1,12 @@
-class SupportRequest
+module CommonFields
+  attr_accessor :request_num
   attr_accessor :referrer_name, :referrer_phone, :referrer_email, :referrer_relationship
   attr_accessor :person_name, :person_phone, :person_email
   attr_accessor :postcode, :address
   attr_accessor :request_type
-  attr_accessor :details
   attr_accessor :other_info
-  attr_accessor :request_num
 
-  def initialize(params)
+  def set_common_fields(params)
     self.request_num = params["number"]
 
     self.referrer_name = params["113648108"]
@@ -22,8 +21,25 @@ class SupportRequest
     self.postcode = params["858656279"]
 
     self.request_type = params["1224654153"]
-    self.details = params["848357083"]
+
     self.other_info = params["830188072"]
+  end
+end
+
+
+class SupportRequest
+  include CommonFields
+  attr_accessor :details
+
+  attr_accessor :closest_larder, :delivery_instructions, :delivery_or_pickup
+
+  def initialize(params)
+    set_common_fields(params)
+    self.details = params["848357083"]
+
+    self.closest_larder = params["1027888410"]
+    self.delivery_instructions = params["1056965329"]
+    self.delivery_or_pickup = params["1097017324"]
   end
 
 end
