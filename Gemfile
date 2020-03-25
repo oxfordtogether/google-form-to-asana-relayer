@@ -10,3 +10,5 @@ group :test do
   gem 'rack-test'
   gem 'rspec'
 end
+
+gem "bugsnag", "~> 6.13"
