@@ -5,7 +5,6 @@ Dotenv.load(".env")
 require 'sinatra'
 
 post '/support_requests' do
-  puts request.inspect
-  puts params
+  puts JSON.parse(request.body.read)
 end
 
