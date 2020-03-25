@@ -1,7 +1,7 @@
 require 'dotenv/load'
 require 'sinatra'
 
-post '/support-requests' do
-  puts "wassup"
+post '/support_requests' do
+  puts params
 end
 
