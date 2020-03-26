@@ -14,11 +14,11 @@ post '/support_requests' do
 
   if request.is_larder_box_request?
     notes = erb :larder_box_request, locals: {request: request}
-    title = "[##{request.request_num}] Larder box request for #{request.person_name}, #{request.postcode}"
+    title = "[##{request.request_num + 102}] Larder box request for #{request.person_name}, #{request.postcode}"
     project = "1168339813840817"
   else
     notes = erb :regular_request, locals: {request: request}
-    title = "[##{request.request_num}] Support request for #{request.person_name}, #{request.postcode}"
+    title = "[##{request.request_num + 102}] Support request for #{request.person_name}, #{request.postcode}"
     project = "1167559196211825"
   end
 
