@@ -26,13 +26,12 @@ post '/support_requests' do
     projects: [project],
     due_on: Date.today + 2.days,
     name: title,
-    html_notes: notes.strip
+    html_notes: notes.strip,
+    custom_fields: request.custom_fields
   }
 
   if ENV["ASANA_API_KEY"]
-    client = Asana::Client.new { |c|
-      c.authentication :access_token, ENV["ASANA_API_KEY"]
-    }
+    client = Asana::Client.new { |c| c.authentication :access_token, ENV["ASANA_API_KEY"] }
 
     client.tasks.create(payload)
   end

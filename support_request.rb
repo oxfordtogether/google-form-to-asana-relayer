@@ -26,24 +26,80 @@ module CommonFields
   end
 end
 
+LARDER_CUSTOM_FIELD_ID = "1168364399641134"
+LARDER_CUSTOM_FIELDS = {
+  blackbird_leys: "1168364399641136",
+  rose_hill: "1168364399707698",
+  arkt:"1168364399707699",
+  barton: "1168364399707702"
+}
+
+HOW_CUSTOM_FIELD_ID = "1168366802048122"
+HOW_CUSTOM_FIELDS = {
+  pickup: "1168366802049153",
+  delivery: "1168366802049158"
+}
 
 class SupportRequest
   include CommonFields
   attr_accessor :details
 
-  attr_accessor :closest_larder, :delivery_instructions, :delivery_or_pickup
+  attr_accessor :closest_larder_text, :delivery_instructions, :delivery_or_pickup
 
   def is_larder_box_request?
-    !!closest_larder
+    !!closest_larder_text
   end
 
   def initialize(params)
     set_common_fields(params)
     self.details = params["848357083"]
 
-    self.closest_larder = params["1027888410"]
+    self.closest_larder_text = params["1027888410"]
     self.delivery_instructions = params["1056965329"]
     self.delivery_or_pickup = params["1097017324"]
   end
 
+  def closest_larder
+    return nil unless closest_larder_text
+
+    if closest_larder_text =~ /barton/i
+      :barton
+    elsif closest_larder_text =~ /rose/i
+      :rose_hill
+    elsif closest_larder_text =~ /ark/i
+      :arkt
+    elsif closest_larder_text =~ /blackbird/i
+      :blackbird_leys
+    end
+  end
+
+  def how
+    if delivery_or_pickup =~ /pickup/i
+      :pickup
+    else
+      :delivery
+    end
+  end
+
+  def custom_fields
+    return {} unless is_larder_box_request?
+
+    h = { HOW_CUSTOM_FIELD_ID => HOW_CUSTOM_FIELDS[how] }
+    h[LARDER_CUSTOM_FIELD_ID] = closest_larder_field_id if closest_larder
+    
+    h
+  end
+
+  def closest_larder_field_id
+    closest_larder && LARDER_CUSTOM_FIELDS[closest_larder]
+  end
+
 end
+
+# require 'asana'
+# require 'dotenv/load'
+# client = Asana::Client.new { |c| c.authentication :access_token, ENV["ASANA_API_KEY"] }
+# client.custom_fields.find_by_workspace(workspace: "1167461191326899")
+
+
+

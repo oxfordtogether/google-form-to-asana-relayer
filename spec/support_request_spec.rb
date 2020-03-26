@@ -4,7 +4,7 @@ describe "My Sinatra Application" do
 
   describe "POST /support_requests" do
     it "returns http success" do
-      
+      skip
       data = {
         "113648108": "Mr Brown, GP",
         "154304881": "GP",
@@ -26,6 +26,7 @@ describe "My Sinatra Application" do
       post "/support_requests", data.to_json, format: :json
       expect(last_response).to be_ok
     end
+
     it "can handle a food larder request" do
       data = {
         "113648108": "referrer name",
@@ -41,7 +42,9 @@ describe "My Sinatra Application" do
         "1183401688": "referrer phone",
         "1224654153": "Community Larder Food Box requests (fill in details below)",
         "1565149373": ["The person/family are aware that I have referred them for support from Oxford Together and consent to these personal details being shared with Oxford Hub and Oxford Hub volunteers"],
-        "1692830319": "address"
+        "1692830319": "address",
+        "number": 70,
+        "email": "drbrown@dr.com",
       }
       post "/support_requests", data.to_json, format: :json
       expect(last_response).to be_ok

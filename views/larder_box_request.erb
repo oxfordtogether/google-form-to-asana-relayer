@@ -3,11 +3,11 @@
 
 <strong>Submitted by</strong>: <%= request.referrer_name %>, <%= request.referrer_relationship %>, <%= request.referrer_email %>
 
-<strong>Nearest larder</strong>: <%= request.closest_larder %>
+<strong>Nearest larder</strong>: <%= request.closest_larder || "unknown" %>
 
 <strong>Delivery/pickup</strong>: <%= request.delivery_or_pickup %>
-<%= request.delivery_instructions %>
-<%= request.other_info %>
+<strong>Delivery instructions</strong>: <%= request.delivery_instructions %>
+<strong>Other info</strong>: <%= request.other_info %>
 
 <strong>Address</strong>: <%= request.address %>, <%= request.postcode %>
 <strong>Phone</strong>: <%= request.person_phone %>
