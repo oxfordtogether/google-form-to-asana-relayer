@@ -4,7 +4,6 @@ describe "My Sinatra Application" do
 
   describe "POST /support_requests" do
     it "returns http success" do
-      skip
       data = {
         "113648108": "Mr Brown, GP",
         "154304881": "GP",

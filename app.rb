@@ -24,7 +24,7 @@ post '/support_requests' do
 
   payload = {
     projects: [project],
-    due_on: Date.today + 2.days,
+    due_on: Date.today,
     name: title,
     html_notes: notes.strip,
     custom_fields: request.custom_fields
