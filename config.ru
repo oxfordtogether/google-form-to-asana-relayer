@@ -5,7 +5,7 @@ $stdout.sync = true
 require 'bugsnag'
 
 Bugsnag.configure do |config|
-  config.api_key = 'YOUR_API_KEY_HERE'
+  config.api_key = ENV['BUGSNAG_API_KEY']
 end
 
 use Bugsnag::Rack
