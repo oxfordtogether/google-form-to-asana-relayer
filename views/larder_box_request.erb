@@ -1,16 +1,16 @@
 <body>
-<strong>Requesting support for</strong>: <%= request.person_name %>, <%= request.person_phone %>
+<strong>Requesting support for</strong>: <%= h request.person_name %>, <%= h request.person_phone %>
 
-<strong>Submitted by</strong>: <%= request.referrer_name %>, <%= request.referrer_relationship %>, <%= request.referrer_email %>
+<strong>Submitted by</strong>: <%= h request.referrer_name %>, <%= h request.referrer_relationship %>, <%= h request.referrer_email %>
 
-<strong>Nearest larder</strong>: <%= request.closest_larder || "unknown" %>
+<strong>Nearest larder</strong>: <%= h request.closest_larder || "unknown" %>
 
-<strong>Delivery/pickup</strong>: <%= request.delivery_or_pickup %>
-<strong>Delivery instructions</strong>: <%= request.delivery_instructions %>
-<strong>Other info</strong>: <%= request.other_info %>
+<strong>Delivery/pickup</strong>: <%= h request.delivery_or_pickup %>
+<strong>Delivery instructions</strong>: <%= h request.delivery_instructions %>
+<strong>Other info</strong>: <%= h request.other_info %>
 
-<strong>Address</strong>: <%= request.address %>, <%= request.postcode %>
-<strong>Phone</strong>: <%= request.person_phone %>
-<strong>Email</strong>: <%= request.person_email %>
+<strong>Address</strong>: <%= h request.address %>, <%= h request.postcode %>
+<strong>Phone</strong>: <%= h request.person_phone %>
+<strong>Email</strong>: <%= h request.person_email %>
 </body>
 

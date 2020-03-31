@@ -7,6 +7,12 @@ require './support_request'
 require 'active_support/time'
 require 'asana'
 
+helpers do
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
+end
+
 post '/support_requests' do
   data = JSON.parse(request.body.read)
 
@@ -30,10 +36,14 @@ post '/support_requests' do
     custom_fields: request.custom_fields
   }
 
-  if ENV["ASANA_API_KEY"]
+  if ENV["ASANA_API_KEY"] && !ENV["ASANA_API_KEY"].empty?
     client = Asana::Client.new { |c| c.authentication :access_token, ENV["ASANA_API_KEY"] }
 
     client.tasks.create(payload)
+  else
+    puts "Not sending to asana"
+
+    puts notes.strip
   end
 
   status :ok
