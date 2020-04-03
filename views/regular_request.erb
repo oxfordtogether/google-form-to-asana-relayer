@@ -1,14 +1,14 @@
 <body>
-<strong>Requesting support for</strong>: <%= h request.person_name %>, <%= h request.person_phone %>
+<strong>Requesting support for</strong>: <%= request.person_name %>, <%= request.person_phone %>
 
-<strong>Submitted by</strong>: <%= h request.referrer_name %>, <%= h request.referrer_relationship %>, <%= h request.referrer_email %>
+<strong>Submitted by</strong>: <%= request.referrer_name %>, <%= request.referrer_relationship %>, <%= h request.referrer_email %>
 
-<strong>Support needed</strong>: <%= h request.request_type %>
-<strong>Details</strong>: <%= h request.details %>
-<strong>Other info</strong>: <%= h request.other_info %>
+<strong>Support needed</strong>: <%= request.request_type %>
+<strong>Details</strong>: <%= request.details %>
+<strong>Other info</strong>: <%= request.other_info %>
 
-<strong>Address</strong>: <%= h request.address %>, <%= h request.postcode %>
-<strong>Phone</strong>: <%= h request.person_phone %>
+<strong>Address</strong>: <%= request.address %>, <%= request.postcode %>
+<strong>Phone</strong>: <%= request.person_phone %>
 <strong>Email</strong>: <%= h request.person_email %>
 </body>
 
