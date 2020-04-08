@@ -31,7 +31,8 @@ LARDER_CUSTOM_FIELDS = {
   blackbird_leys: "1168364399641136",
   rose_hill: "1168364399707698",
   arkt:"1168364399707699",
-  barton: "1168364399707702"
+  barton: "1168364399707702",
+  north_oxford: "1170051568056719",
 }
 
 HOW_CUSTOM_FIELD_ID = "1168366802048122"
@@ -70,6 +71,8 @@ class SupportRequest
       :arkt
     elsif closest_larder_text =~ /blackbird/i
       :blackbird_leys
+    elsif closest_larder_text =~ /north/i
+      :north_oxford
     end
   end
 
